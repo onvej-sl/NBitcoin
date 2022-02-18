@@ -174,7 +174,7 @@ namespace NBitcoin
 				return false;
 			}
 
-			var hash = this.Transaction.GetSignatureHashTaproot(PrecomputedTransactionData, new TaprootExecutionData(this.Index, executionData.TapleafHash)
+			var hash = this.Transaction.GetSignatureHashTaproot(new TaprootReadyPrecomputedTransactionData(Transaction, new TxOut[] {SpentOutput}), new TaprootExecutionData(this.Index, executionData.TapleafHash)
 			{
 				AnnexHash = executionData.AnnexHash,
 				CodeseparatorPosition = executionData.CodeseparatorPosition,
@@ -1748,7 +1748,7 @@ namespace NBitcoin
 
 		private bool EvalChecksig(byte[] sig, byte[] pubkey, Script s, int pbegincodehash, TransactionChecker checker, HashVersion sigversion, out bool success)
 		{
-			switch	(sigversion)
+			switch (sigversion)
 			{
 				case HashVersion.Original:
 				case HashVersion.WitnessV0:
